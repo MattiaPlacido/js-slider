@@ -1,0 +1,37 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  display: block;
+  border-radius: 0.5rem;
+  border: grey 1px solid;
+}
+
+.wrapper {
+  padding: 10rem;
+}
+
+.secondary-imgs {
+  display: flex;
+  gap: 20px;
+}
+.secondary-imgs img {
+  flex-grow: 1;
+}
+/* JUMBO */
+#jumbo {
+  max-width: 900px;
+  align-items: center;
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+#jumbo .control {
+  padding: 1rem;
+  font-size: 2rem;
+}
