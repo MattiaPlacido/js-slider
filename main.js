@@ -1,7 +1,10 @@
 // HTML ITEMS
-const jumboLeft = document.getElementById("jumbo-go-left");
-const jumboRight = document.getElementById("jumbo-go-right");
+const jumboButtonLeft = document.getElementById("jumbo-go-left");
+const jumboButtonRight = document.getElementById("jumbo-go-right");
 const jumboImg = document.getElementById("jumbo-img");
+const jumboDescription = document.getElementById("jumbo-description");
+const jumboTitle = document.getElementById("jumbo-title");
+const secondaryImgsHtml = document.getElementById("secondary-imgs");
 
 const imgSlider = [
   {
@@ -31,13 +34,48 @@ const imgSlider = [
   },
 ];
 
+//creo la sezione con le immagini all'interno
+const generateSecondaryImgs = (imageArray, outputContainer) => {
+  let secondaryImgs = ``;
+  imageArray.forEach((element, index) => {
+    secondaryImgs += `
+    <div class="col">
+    <img src="./img/${element.img}" id="img${index + 1}">
+    </div>`;
+  });
+  outputContainer.innerHTML = secondaryImgs;
+
+  const nodeArray = document.querySelectorAll("#secondary-imgs img");
+
+  return nodeArray;
+};
+
+//recupero i nodi delle immagini appena generate
+const secondaryImgsArray = generateSecondaryImgs(imgSlider, secondaryImgsHtml);
+
+console.log(secondaryImgsArray.length);
+
+//cambio immagine jumbo cliccando le immagini secondarie
+secondaryImgsArray.forEach((element, index) => {
+  element.addEventListener("click", () => {
+    jumboImg.src = element.src;
+    rotatingImage = index;
+  });
+});
+
+//creo la sezione dentro l'html con le immagini generate
+
 let rotatingImage = 0;
 
-jumboImg.src = "./img/01.jpg";
+//cambio immagine jumbo dai tasti
 
-jumboLeft.addEventListener("click", () => {
+jumboButtonLeft.addEventListener("click", () => {
   const currentImage = imgSlider[rotatingImage].img;
+
   jumboImg.src = `./img/${currentImage}`;
+  jumboTitle.innerText = currentImage.title;
+  jumboDescription.innerText = currentImage.description;
+
   if (rotatingImage == 0) {
     rotatingImage = 4;
   } else {
@@ -47,9 +85,13 @@ jumboLeft.addEventListener("click", () => {
   setInterval.backward = true;
 });
 
-jumboRight.addEventListener("click", () => {
-  const currentImage = imgSlider[rotatingImage].img;
-  jumboImg.src = `./img/${currentImage}`;
+jumboButtonRight.addEventListener("click", () => {
+  const currentImage = imgSlider[rotatingImage];
+
+  jumboImg.src = `./img/${currentImage.img}`;
+  jumboTitle.innerText = currentImage.title;
+  jumboDescription.innerText = currentImage.description;
+
   if (rotatingImage == 4) {
     rotatingImage = 0;
   } else rotatingImage++;
@@ -59,7 +101,7 @@ jumboRight.addEventListener("click", () => {
 
 //AUTOPLAY
 setInterval(() => {
-  const currentImage = imgSlider[rotatingImage].img;
+  const currentImage = imgSlider[rotatingImage];
   //se non è ne forward ne backward sta fermo
   if (setInterval.forward) {
     if (rotatingImage == 4) {
@@ -70,7 +112,10 @@ setInterval(() => {
       rotatingImage = 4;
     } else rotatingImage--;
   }
-  jumboImg.src = `./img/${currentImage}`;
-}, 3000);
+
+  jumboImg.src = `./img/${currentImage.img}`;
+  jumboTitle.innerText = currentImage.title;
+  jumboDescription.innerText = currentImage.description;
+}, 1000);
 
 // Da gestire handler che impedisce bug corrente dello switch immagini

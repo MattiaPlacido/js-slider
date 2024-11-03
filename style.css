@@ -8,30 +8,53 @@
 img {
   width: 100%;
   display: block;
-  border-radius: 0.5rem;
   border: grey 1px solid;
 }
 
 .wrapper {
   padding: 10rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.secondary-imgs {
+#secondary-imgs {
   display: flex;
   gap: 20px;
+  cursor: pointer;
 }
-.secondary-imgs img {
+#secondary-imgs img {
   flex-grow: 1;
+  border-radius: 0.5rem;
 }
 /* JUMBO */
 #jumbo {
-  max-width: 900px;
   align-items: center;
   display: flex;
   margin-bottom: 2rem;
   justify-content: center;
+  position: relative;
+  border-radius: 1rem;
+  max-width: 1000px;
 }
+
+#jumbo-img {
+  border-radius: 1rem;
+}
+
 #jumbo .control {
   padding: 1rem;
   font-size: 2rem;
+}
+
+.jumbo-information {
+  position: absolute;
+  background-color: rgb(0, 0, 0, 0.7);
+  color: white;
+  text-align: right;
+  font-weight: bold;
+  padding: 1rem;
+  width: -webkit-fill-available;
+  bottom: 0;
+  border-radius: 0 0 1rem 1rem;
 }
